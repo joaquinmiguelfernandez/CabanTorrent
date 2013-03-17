@@ -1,0 +1,31 @@
+#!/usr/local/bin/python
+
+# This script it's made for Python 3.3.0
+import os, shutil, urllib.request, gzip
+
+def main():
+  path = "C:\\Users\\Nacho\\Python_workspace"
+  #This url it's from KickAssTorrent
+  url = "http://kat.ph/hourlydump.txt.gz"
+  unZipFile("C:\\Users\\Nacho\\Python_workspace\\hourlydump.txt.gz")
+
+#This Function it's to download a file from a url
+def getKickAssReport(theurl, thedir):
+  #Give the name of the original file and added to the path
+  file_name = os.path.join(thedir,theurl.split('/')[-1])
+  #Download and save the file in the path
+  with urllib.request.urlopen(theurl) as response, open(file_name, 'wb') as out_file:
+    shutil.copyfileobj(response, out_file)
+
+#"C:\\Users\\Nacho\\Python_workspace\\hourlydump.txt.gz"
+#This function will uncompress the file
+def unZipFile(file_path):
+  f = gzip.GzipFile(fileobj=open(file_path, 'rb'))
+  data = f.read()
+  print (data)
+
+#TODO: parse the extracted file
+  
+#-------------------------------
+if __name__ == "__main__":
+    main()
